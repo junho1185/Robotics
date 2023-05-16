@@ -1,7 +1,7 @@
 function [v, w] = velocityPropagation(T)
     index = 1;
-    syms t1_dot t2_dot t3_dot t4_dot t5_dot t6_dot;
-    tdot = [t1_dot, t2_dot, t3_dot, t4_dot, t5_dot, t6_dot];
+    syms t_dot_1 t_dot_2 t_dot_3 t_dot_4 t_dot_5 t_dot_6;
+    tdot = [t_dot_1, t_dot_2, t_dot_3, t_dot_4, t_dot_5, t_dot_6];
     w{index} = [0; 0; tdot(index)];
     v{index} = [0; 0; 0];
 
