@@ -1,6 +1,6 @@
-function finT = ultimateT(T)
+function finT = calT(T, cap)
     finT = T{1};
-    for i = 2:size(T, 2)
+    for i = 2:cap
         finT = simplify(finT * T{i});
     end
 end
