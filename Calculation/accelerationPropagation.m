@@ -1,10 +1,4 @@
-function [v_dot, w_dot] = accelerationPropagation(v, w, T)
-
-    syms t_dot_1 t_dot_2 t_dot_3 t_dot_4 t_dot_5 t_dot_6;
-    tdot = [t_dot_1, t_dot_2, t_dot_3, t_dot_4, t_dot_5, t_dot_6];
-    syms t_ddot_1 t_ddot_2 t_ddot_3 t_ddot_4 t_ddot_5 t_ddot_6;
-    tdotdot = [t_ddot_1, t_ddot_2, t_ddot_3, t_ddot_4, t_ddot_5, t_ddot_6];
-    
+function [v_dot, w_dot] = accelerationPropagation(v, w, T, tdot, tdotdot) 
     v_dot{1} = [0; 0; 0];
     w_dot{1} = [0; 0; tdotdot(1)];
 

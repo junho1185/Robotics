@@ -13,10 +13,10 @@ syms m1 m2 m3;
 
 % Denavit-Hatenberg Table
 DH = [
-            0 0 0.85 t1;
+            0 0 L1 t1;
             0 -pi/2 0 t2;
-            1.7 pi/2 0 t3;
-            0.45 0 0 0
+            L2 pi/2 0 t3;
+            L3 0 0 0
         ];
 
 % center of gravity vector
@@ -44,7 +44,7 @@ I_g{3} = [
 ];
 
 % mass
-m = [183.62, 369.3, 47.967];
+m = [183.62, 369.3,];
 
 disp("Calculating Forward Kinematics...");
 forwardKinematics;
