@@ -47,7 +47,7 @@ I_g{3} = [
 m = [m1, m2, m3];
 
 % gravity
-g0 = [0; 0; -g];
+g0 = [0; -g; 0];
 
 disp("Calculating Forward Kinematics...");
 forwardKinematics;
@@ -74,6 +74,9 @@ arrayViewer(v_dot);
 disp("Angular Acceleration");
 arrayViewer(w_dot);
 
+disp("Linear Acceleration of G");
+arrayViewer(vg_dot);
+
 disp("Forces: f");
 arrayViewer(f);
 
@@ -81,5 +84,5 @@ disp("Moments: n");
 arrayViewer(n);
 
 disp("Tau");
-tau = vpa(tau, 5);
+% tau = vpa(tau, 5);
 tau

@@ -1,7 +1,6 @@
 function [v, w] = velocityPropagation(T, tdot)
-    index = 1;
-    w{index} = [0; 0; tdot(index)];
-    v{index} = [0; 0; 0];
+    w{1} = [0; 0; tdot(1)];
+    v{1} = [0; 0; 0];
 
     for i = 2:size(T, 2)
         R = transpose(T{i}(1:3, 1:3));

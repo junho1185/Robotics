@@ -12,6 +12,7 @@ function T = dh_to_T(DH_Table)
                     sin(theta)*cos(alpha) cos(theta)*cos(alpha) -sin(alpha) -sin(alpha)*d;
                     sin(theta)*sin(alpha) cos(theta)*sin(alpha) cos(alpha) cos(alpha)*d;
                     0 0 0 1];
+            T{index} = simplify(T{index});
             index = index + 1;
         end
     end
