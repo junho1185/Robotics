@@ -1,7 +1,5 @@
-function [vg_dot, f, n, tau] = forcePropagation(T, w, v_dot, w_dot, m, rg, I_g)
+function [vg_dot, f, n, tau] = forcePropagation(T, w, v_dot, w_dot, m, rg, I_g, g0)
     % init
-    syms g;
-    g0 = [0; 0; -g];
     f{size(T, 2)} = [0; 0; 0];
     n{size(T, 2)} = [0; 0; 0];
 
@@ -14,16 +12,12 @@ function [vg_dot, f, n, tau] = forcePropagation(T, w, v_dot, w_dot, m, rg, I_g)
         ];
     end
 
-    i = size(T, 2);
-    f{i} = [0; 0; 0];
-    n{i} = [0; 0; 0];
-
     for i = (size(T, 2)-1):-1:1
         Ri = T{i+1}(1:3, 1:3);
         T0i = calT(T, i);
         Ri0 = transpose(T0i(1:3, 1:3));
         f{i} = m(i)*vg_dot{i} + Ri*f{i+1} - m(i)*(Ri0 * g0);
-        n{i} = (I_g{i}*w_dot{i} + cross(w{i}, I_g{i}*w{i})) + Ri*n{i+1} + (cross(rg{i}, f{i}) - cross(transpose(Ri)*rg{i}, Ri*f{i+1}));
+        n{i} = (I_g{i}*w_dot{i} + cross(w{i}, I_g{i}*w{i})) + Ri*n{i+1} + (cross(rg{i}, f{i}) - cross(transpose(Ri)*rg{i+1}, Ri*f{i+1}));
 
         % simplifying
         f{i} = simplify(f{i});

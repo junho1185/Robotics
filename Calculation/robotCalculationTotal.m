@@ -8,43 +8,46 @@ tdotdot = [t_ddot_1, t_ddot_2, t_ddot_3, t_ddot_4, t_ddot_5, t_ddot_6];
 syms l_g_1x l_g_1y l_g_1z l_g_2x l_g_2y l_g_2z l_g_3x l_g_3y l_g_3z;
 syms I_G_1zz I_G_2zz I_G_3zz;
 syms m1 m2 m3;
+syms g
 
 % Setting data
 
 % Denavit-Hatenberg Table
 DH = [
-            0 0 0.85 t1;
-            0 -pi/2 0 t2;
-            1.7 pi/2 0 t3;
-            0.45 0 0 0
+        0 0 0 t1;
+        L1 0 0 t2;
+        L2 0 0 0
         ];
 
 % center of gravity vector
-rg{1} = [0; -0.472; 0];
-rg{2} = [0.85; 0; 0];
-rg{3} = [0.1688; 0; 0];
+rg{1} = [l_g_1x; 0; 0];
+rg{2} = [l_g_2x; 0; 0];
+rg{3} = [0.162; 0; 0];
 
 % Inertia Matrix
 I_g{1} = [
-    9.819 0 0;
-    0 9.816 0;
-    0 0 0.896
+    0 0 0;
+    0 0 0;
+    0 0 I_G_1zz
 ];
 
 I_g{2} = [
-    1.775 0 0;
-    0 73.595 0;
-    0 0 73.595
+    0 0 0;
+    0 0 0;
+    0 0 I_G_2zz
 ];
 
 I_g{3} = [
-    0.282 0 0;
-    0 0.547 0;
-    0 0 0.57
+    0.006 0 0;
+    0 0.088 0;
+    0 0 0.092
 ];
 
 % mass
-m = [183.62, 369.3, 47.967];
+m = [m1, m2, m3];
+
+% gravity
+g0 = [0; 0; -g];
 
 disp("Calculating Forward Kinematics...");
 forwardKinematics;
@@ -54,7 +57,7 @@ disp("Calculating Jacobian...");
 [v_dot, w_dot] = accelerationPropagation(v, w, T, tdot, tdotdot);
 
 disp("Calculation Equation of Motion...");
-[vg_dot, f, n, tau] = forcePropagation(T, w, v_dot, w_dot, m, rg, I_g);
+[vg_dot, f, n, tau] = forcePropagation(T, w, v_dot, w_dot, m, rg, I_g, g0);
 
 disp("Forward Kinematics:");
 finT
@@ -71,5 +74,12 @@ arrayViewer(v_dot);
 disp("Angular Acceleration");
 arrayViewer(w_dot);
 
+disp("Forces: f");
+arrayViewer(f);
+
+disp("Moments: n");
+arrayViewer(n);
+
 disp("Tau");
+tau = vpa(tau, 5);
 tau
