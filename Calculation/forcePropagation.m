@@ -5,11 +5,6 @@ function [vg_dot, f, n, tau] = forcePropagation(T, w, v_dot, w_dot, m, rg, I_g, 
 
     for i = 1:(size(T, 2)-1)
         vg_dot{i} = v_dot{i} + cross(w_dot{i}, rg{i}) + cross(w{i}, cross(w{i}, rg{i}));
-        I_g{i} = [
-            0 0 0;
-            0 0 0;
-            0 0 I_g{i}(3, 3)
-        ];
     end
 
     for i = (size(T, 2)-1):-1:1
