@@ -6,8 +6,8 @@ tdotdot = [t_ddot_1, t_ddot_2, t_ddot_3, 0, 0, 0];
 
 
 % Setting data
-% dataSetting_numbers;
-dataSetting_symbols;
+dataSetting_numbers;
+%dataSetting_symbols;
 
 disp("Calculating Forward Kinematics...");
 forwardKinematics;
@@ -16,7 +16,7 @@ disp("Calculating Jacobian...");
 [v, w] = velocityPropagation(T, tdot);
 [v_dot, w_dot] = accelerationPropagation(v, w, T, tdot, tdotdot);
 
-disp("Calculation Equation of Motion...");
+disp("Calculating Equation of Motion...");
 [vg_dot, f, n, tau] = forcePropagation(T, w, v_dot, w_dot, m, rg, I_g, g0);
 
 disp("Forward Kinematics:");
